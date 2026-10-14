@@ -1,0 +1,21 @@
+rules:
+  - id: "R1"
+    name: "Brute Force tespiti"
+    description: "Ayni IP'den 10 dakikada 5 veya daha fazla basarisiz giris denemesi"
+    time_window_minutes: 10
+    threshold_count: 5
+    condition: "level == 'ERROR' or 'failed' in message.lower()"
+
+  - id: "R2"
+    name: "Mesai disi yonetici girisi"
+    description: "Saat 22:00 ile 06:00 arasinda admin/yönetici hesabiyla yapilan islemler"
+    start_hour: 22
+    end_hour: 6
+    condition: "'admin' in message.lower() or 'root' in message.lower()"
+
+  - id: "R3"
+    name: "Port tarama tespiti"
+    description: "Kisa surede çok sayida farkli port'a baglanti denemesi"
+    time_window_minutes: 5
+    threshold_ports: 5
+    condition: "'port' in message.lower() or 'connect' in message.lower()"

@@ -1,0 +1,8 @@
+README.md
+setup.py
+src/logsense.egg-info/PKG-INFO
+src/logsense.egg-info/SOURCES.txt
+src/logsense.egg-info/dependency_links.txt
+src/logsense.egg-info/entry_points.txt
+src/logsense.egg-info/requires.txt
+src/logsense.egg-info/top_level.txt
