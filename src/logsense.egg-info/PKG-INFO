@@ -1,3 +1,5 @@
 Metadata-Version: 2.1
 Name: logsense
 Version: 0.1.0
+Summary: CLI log parser and analyzer
+Requires-Python: >=3.11

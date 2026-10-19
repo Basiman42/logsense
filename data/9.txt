@@ -1,0 +1,10 @@
+<134>2026-10-14T22:15:00Z 192.168.1.45 [INFO] User admin initiated system backup routine
+<134>2026-10-14T23:45:12Z 10.0.0.15 [WARN] Remote ssh login established by root account
+<134>2026-10-14T03:20:00Z 192.168.2.100 [ERROR] failed password for admin from untrusted terminal
+<134>2026-10-14T05:55:30Z 172.16.1.10 [INFO] Configuration file modified by root user
+<134>2026-10-14T13:35:00Z 192.168.10.45 [ERROR] failed password for user ahmet
+<134>2026-10-14T13:36:12Z 192.168.10.45 [ERROR] failed password for user ahmet
+<134>2026-10-14T13:37:05Z 192.168.10.45 [ERROR] failed password for user ahmet
+<134>2026-10-14T13:38:40Z 192.168.10.45 [ERROR] failed password for user ahmet
+<134>2026-10-14T13:39:15Z 192.168.10.45 [ERROR] failed password for user ahmet
+

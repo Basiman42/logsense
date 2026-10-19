@@ -1,5 +1,12 @@
 README.md
 setup.py
+src/cli.py
+src/main.py
+src/models.py
+src/parsers.py
+src/report.py
+src/rules.py
+src/storage.py
 src/logsense.egg-info/PKG-INFO
 src/logsense.egg-info/SOURCES.txt
 src/logsense.egg-info/dependency_links.txt

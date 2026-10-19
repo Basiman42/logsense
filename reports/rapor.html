@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LogSense | Analiz Raporu</title>
+  <style>
+    :root { color-scheme: light; --ink:#172033; --muted:#667085; --line:#e4e8ef;
+            --blue:#315eea; --pale:#f4f7fb; --amber:#fff7e6; --amber-ink:#925f00; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:#f4f6fa; color:var(--ink); font:15px/1.55 Arial,sans-serif; }
+    main { max-width:1120px; margin:0 auto; padding:28px 18px 50px; }
+    header { padding:26px 28px; border-radius:16px; color:#fff;
+             background:linear-gradient(120deg,#193b9b,#315eea); }
+    header h1 { margin:0 0 4px; font-size:28px; }
+    header p { margin:0; color:#dce5ff; }
+    .metrics { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+               gap:14px; margin:18px 0 24px; }
+    .metric,.panel,.finding { background:#fff; border:1px solid var(--line); border-radius:13px; }
+    .metric { padding:17px 19px; }
+    .metric span { display:block; color:var(--muted); font-size:13px; }
+    .metric strong { display:block; margin-top:4px; font-size:25px; }
+    .panel { padding:22px; margin:18px 0; }
+    h2 { margin:0 0 14px; font-size:20px; }
+    h3 { margin:12px 0 8px; font-size:17px; }
+    .notice { padding:11px 14px; border-radius:9px; background:#eef3ff; color:#34446b; }
+    .finding { padding:18px; margin:12px 0; border-left:5px solid #f0ad2e; }
+    .finding-top { display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; color:var(--muted); font-size:13px; }
+    .badge { display:inline-block; padding:3px 9px; border-radius:999px;
+             background:#fff1cc; color:var(--amber-ink); font-weight:700; }
+    .reason { margin:8px 0 12px; }
+    .meta { color:var(--muted); font-size:14px; }
+    .unknown { color:#9a6700; font-weight:700; }
+    details { margin-top:12px; border-top:1px solid var(--line); padding-top:10px; }
+    summary { cursor:pointer; color:var(--blue); font-weight:700; }
+    pre { white-space:pre-wrap; overflow-wrap:anywhere; margin:10px 0 0; padding:12px;
+          border-radius:8px; background:#f6f8fb; color:#344054; font:13px/1.5 Consolas,monospace; }
+    .empty { padding:15px; border-radius:9px; background:#f7f9fc; color:var(--muted); }
+    .charts { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:16px; }
+    .chart-card { min-width:0; padding:12px; border:1px solid var(--line); border-radius:10px; }
+    .chart-card img { display:block; width:100%; height:auto; }
+    table { width:100%; border-collapse:collapse; }
+    th,td { padding:10px; border-bottom:1px solid var(--line); text-align:left; }
+    th { color:var(--muted); font-size:13px; }
+    footer { margin-top:22px; color:var(--muted); font-size:12px; }
+    @media(max-width:540px) { header h1 {font-size:23px;} .panel {padding:16px;} }
+  </style>
+</head>
+<body><main>
+  <header>
+    <h1>LogSense — Analiz Raporu</h1>
+    <p>Kapsam: Tüm veritabanı · Rapor zamanı: 2026-10-14 13:52:55 Türkiye Standart Saati · Otomatik kural eşleşmeleri inceleme gerektirir.</p>
+  </header>
+
+  <section class="metrics" aria-label="Özet">
+    <div class="metric"><span>Toplam log</span><strong>1454</strong></div>
+    <div class="metric"><span>Kural eşleşmesi</span><strong>5</strong></div>
+    <div class="metric"><span>Saatlik anomali</span><strong>0</strong></div>
+  </section>
+
+  <section class="panel">
+    <h2>Güvenlik bulguları</h2>
+    <p class="notice">Her bulguda önce neden eşleştiği, ardından ham log kanıtı gösterilir. IP adresi bulunamayan kayıtlar “IP belirlenemedi” olarak işaretlenir; 0.0.0.0 gerçek kaynak IP değildir.</p>
+    
+      
+      <article class="finding">
+        <div class="finding-top">
+          <span class="badge">R1 · Brute Force tespiti</span>
+          <span>2026-10-14T13:39:15</span>
+        </div>
+        <h3>Olası brute-force giriş denemesi</h3>
+        <p class="reason"><strong>Neden eşleşti?</strong> Aynı IP&#39;den 10 dakika içinde 5 başarısız giriş kaydı bulundu; eşik 5.</p>
+        <p class="meta"><strong>Kaynak dosya:</strong> 9.txt</p>
+        <p class="meta"><strong>Kaynak IP:</strong>
+          192.168.10.45
+        </p>
+        <details>
+          <summary>Ham log kanıtını göster</summary>
+          <pre>failed password for user ahmet</pre>
+        </details>
+      </article>
+      
+      <article class="finding">
+        <div class="finding-top">
+          <span class="badge">R2 · Mesai disi yonetici girisi</span>
+          <span>2026-10-14T03:20:00</span>
+        </div>
+        <h3>Mesai dışı yönetici hesabı etkinliği</h3>
+        <p class="reason"><strong>Neden eşleşti?</strong> Kayıt saati 03:20:00; kuralın mesai dışı aralığı 22:00–06:00. Mesajda kullanıcı ev dizini yolu dışında admin/root hesabı anahtar sözcüğü bulundu. Bu bir kural eşleşmesidir; tek başına doğrulanmış yetkisiz erişim kanıtı değildir.</p>
+        <p class="meta"><strong>Kaynak dosya:</strong> 9.txt</p>
+        <p class="meta"><strong>Kaynak IP:</strong>
+          192.168.2.100
+        </p>
+        <details>
+          <summary>Ham log kanıtını göster</summary>
+          <pre>failed password for admin from untrusted terminal</pre>
+        </details>
+      </article>
+      
+      <article class="finding">
+        <div class="finding-top">
+          <span class="badge">R2 · Mesai disi yonetici girisi</span>
+          <span>2026-10-14T05:55:30</span>
+        </div>
+        <h3>Mesai dışı yönetici hesabı etkinliği</h3>
+        <p class="reason"><strong>Neden eşleşti?</strong> Kayıt saati 05:55:30; kuralın mesai dışı aralığı 22:00–06:00. Mesajda kullanıcı ev dizini yolu dışında admin/root hesabı anahtar sözcüğü bulundu. Bu bir kural eşleşmesidir; tek başına doğrulanmış yetkisiz erişim kanıtı değildir.</p>
+        <p class="meta"><strong>Kaynak dosya:</strong> 9.txt</p>
+        <p class="meta"><strong>Kaynak IP:</strong>
+          172.16.1.10
+        </p>
+        <details>
+          <summary>Ham log kanıtını göster</summary>
+          <pre>Configuration file modified by root user</pre>
+        </details>
+      </article>
+      
+      <article class="finding">
+        <div class="finding-top">
+          <span class="badge">R2 · Mesai disi yonetici girisi</span>
+          <span>2026-10-14T22:15:00</span>
+        </div>
+        <h3>Mesai dışı yönetici hesabı etkinliği</h3>
+        <p class="reason"><strong>Neden eşleşti?</strong> Kayıt saati 22:15:00; kuralın mesai dışı aralığı 22:00–06:00. Mesajda kullanıcı ev dizini yolu dışında admin/root hesabı anahtar sözcüğü bulundu. Bu bir kural eşleşmesidir; tek başına doğrulanmış yetkisiz erişim kanıtı değildir.</p>
+        <p class="meta"><strong>Kaynak dosya:</strong> 9.txt</p>
+        <p class="meta"><strong>Kaynak IP:</strong>
+          192.168.1.45
+        </p>
+        <details>
+          <summary>Ham log kanıtını göster</summary>
+          <pre>User admin initiated system backup routine</pre>
+        </details>
+      </article>
+      
+      <article class="finding">
+        <div class="finding-top">
+          <span class="badge">R2 · Mesai disi yonetici girisi</span>
+          <span>2026-10-14T23:45:12</span>
+        </div>
+        <h3>Mesai dışı yönetici hesabı etkinliği</h3>
+        <p class="reason"><strong>Neden eşleşti?</strong> Kayıt saati 23:45:12; kuralın mesai dışı aralığı 22:00–06:00. Mesajda kullanıcı ev dizini yolu dışında admin/root hesabı anahtar sözcüğü bulundu. Bu bir kural eşleşmesidir; tek başına doğrulanmış yetkisiz erişim kanıtı değildir.</p>
+        <p class="meta"><strong>Kaynak dosya:</strong> 9.txt</p>
+        <p class="meta"><strong>Kaynak IP:</strong>
+          10.0.0.15
+        </p>
+        <details>
+          <summary>Ham log kanıtını göster</summary>
+          <pre>Remote ssh login established by root account</pre>
+        </details>
+      </article>
+      
+    
+  </section>
+
+  <section class="panel">
+    <h2>Saatlik istatistiksel anomaliler</h2>
+    
+      <p class="empty">Anomali eşiğini aşan saat dilimi bulunmadı.</p>
+    
+  </section>
+
+  <section class="panel">
+    <h2>Trafik grafikleri</h2>
+    <div class="charts">
+      
+      <div class="chart-card"><img src="top_ips.png" alt="En çok log üreten kaynaklar"></div>
+      
+      
+      <div class="chart-card"><img src="hourly_distribution.png" alt="Saatlere göre log dağılımı"></div>
+      
+    </div>
+  </section>
+  <footer>Rapor, yapılandırılmış kurallarla otomatik oluşturulmuştur. Tespitleri ham log ve sistem bağlamıyla doğrulayın.</footer>
+</main></body></html>

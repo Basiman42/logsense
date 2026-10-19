@@ -1,12 +1,21 @@
-<<<<<<< HEAD
-from setuptools import setup, find_packages
+from setuptools import setup
+
 
 setup(
     name="logsense",
     version="0.1.0",
-    # Kodların src klasörü altında olduğunu sisteme söylüyoruz
+    description="CLI log parser and analyzer",
     package_dir={"": "src"},
-    packages=find_packages(where="src"),
+    py_modules=[
+        "cli",
+        "main",
+        "models",
+        "parsers",
+        "report",
+        "rules",
+        "storage",
+    ],
+    python_requires=">=3.11",
     install_requires=[
         "pyyaml",
         "matplotlib",
@@ -14,28 +23,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "logsense=cli:main", # src/cli.py içindeki main fonksiyonunu tetikler
+            "logsense=cli:main",
         ],
     },
 )
-=======
-from setuptools import setup, find_packages
-
-setup(
-    name="logsense",
-    version="0.1.0",
-    # Kodların src klasörü altında olduğunu sisteme söylüyoruz
-    package_dir={"": "src"},
-    packages=find_packages(where="src"),
-    install_requires=[
-        "pyyaml",
-        "matplotlib",
-        "jinja2",
-    ],
-    entry_points={
-        "console_scripts": [
-            "logsense=cli:main", # src/cli.py içindeki main fonksiyonunu tetikler
-        ],
-    },
-)
->>>>>>> 7834c630897abf4b894656d3d1fc88421ace8501
